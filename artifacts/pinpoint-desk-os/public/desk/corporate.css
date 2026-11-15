@@ -87,6 +87,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .screenhead h1{font-size:21px;font-weight:600;line-height:1.25;letter-spacing:-.025em;margin:7px 0}
 .screenhead p{font-size:12px;color:var(--muted);line-height:1.6;margin:0;max-width:65ch}
 .concept-foot{font-size:10px;line-height:1.6;color:var(--muted);border-top:1px solid var(--line);margin-top:24px;padding:14px 0 24px}
+/* Reserve space rather than covering Clerk's composer during the tour. */
+body.tour-active .app{padding-bottom:90px}
+#tourbar[hidden]{display:none!important}
+@media(max-width:900px){body.tour-active .app{padding-bottom:145px}#tourbar{max-height:130px;overflow:auto}}
 h2.sh{font-size:11px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--ink2);margin:22px 0 10px}
 .card{padding:16px;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 0 #42000806}
 .card .hd{margin-bottom:10px;padding:0;border:0;gap:8px}

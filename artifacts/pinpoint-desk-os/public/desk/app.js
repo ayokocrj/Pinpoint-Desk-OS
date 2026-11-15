@@ -518,7 +518,7 @@ function render(tab,flash){
   $$('.rail .it').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));
   $$('#mobtabs button').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));
   main.scrollTop=same&&!flash?keep:0;
-  if(flash){const el=document.getElementById(flash); if(el){el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); el.scrollIntoView({block:'center',behavior:reduced?'auto':'smooth'})}}
+  if(flash){const el=document.getElementById(flash); if(el){el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); main.scrollTo({top:main.scrollTop+el.getBoundingClientRect().top-main.getBoundingClientRect().top-main.clientHeight/2+el.clientHeight/2,behavior:reduced?'auto':'smooth'})}}
   $$('.rail .it .dotf').forEach(d=>d.remove());
   const dot=t=>{const b=$('.rail .it[data-tab="'+t+'"]'); if(b) b.insertAdjacentHTML('beforeend','<i class="dotf" title="Waits for you"></i>')};
   if(!S.approved[HERO]) dot(1); if(MYDUPS.some(d=>!S.dup[d.pid])) dot(3);
@@ -531,10 +531,14 @@ function status(){const st=$('#agst'); st.classList.toggle('paused',S.paused); s
 /* ---------------- guided tour: seven steps, about a minute ---------------- */
 let TOUR=null;
 function tourBar(text,i,n,dur){ let b=document.getElementById('tourbar'); if(!b){ b=document.createElement('div'); b.id='tourbar'; b.setAttribute('role','status'); b.innerHTML='<span class="tb-step"></span><span class="tb-text"></span><button class="btn sm" data-act="tour-skip">Skip</button><i class="tb-bar"></i>'; document.body.append(b); } b.querySelector('.tb-step').textContent=i+' / '+n; b.querySelector('.tb-text').textContent=text; b.hidden=false; const bar=b.querySelector('.tb-bar'); bar.style.transition='none'; bar.style.width='0'; void bar.offsetWidth; if(dur&&!reduced){bar.style.transition='width '+dur+'ms linear'; bar.style.width='100%'} }
-function tourEnd(){ if(TOUR){ TOUR.forEach(clearTimeout); TOUR=null } const b=document.getElementById('tourbar'); if(b) b.hidden=true; }
+function tourEnd(){ if(TOUR){ TOUR.forEach(clearTimeout); TOUR=null } document.getElementById('tourbar')?.remove(); document.body.classList.remove('tour-active'); }
 function resetDemo(){ Object.assign(S,{paused:false,level:2,mid:HERO,approved:{},qback:{},agreed:{},off:{},dismissed:{},fu:{},fuOpen:null,dup:{},cvsel:'CV-05',cvdec:{},paste:null,pasteText:'',btsel:null,probes:null,tamper:null,verify:null,showBlocked:false,showNext:false,showLater:false,cvtest:null}); if(S.tamperOld){S.tamperOld=null} status(); closeDrawer(); }
 function tour(){
   tourEnd(); if(S.tamper){ S.ledger[S.tamper.i].detail=S.tamper.old; S.tamper=null } resetDemo(); stream.innerHTML='';
+  document.body.classList.remove('lay-desk','lay-chat');
+  document.body.classList.add('tour-active');
+  $$('.lay button').forEach(b=>b.classList.toggle('on',b.dataset.v==='split'));
+  addAI({steps:[],html:'<p><b>Your guided desk walkthrough</b></p><p>I will take you through the morning brief, a proposed longlist and the checks behind each decision. Follow my explanations here and the evidence in the workspace.</p>'});
   const st=[
    [0,()=>{render(0,'arrive');toWs()},'Tuesday, 08:12. A mandate has arrived, and the brief for the day is already there: nine people to call, each with a reason.'],
    [8000,()=>{S.fuOpen=BR.today[0].cid; render(0,'fu-'+BR.today[0].cid);toWs()},'One follow-up, opened: the note behind it, its date, and a draft that waits in the mailbox. Nothing was sent.'],
