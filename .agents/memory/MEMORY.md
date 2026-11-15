@@ -1,0 +1,1 @@
+- [Démo interactive Pinpoint](pinpoint-scope.md) — Le livrable demandé est une démo de l'application, pas une animation.

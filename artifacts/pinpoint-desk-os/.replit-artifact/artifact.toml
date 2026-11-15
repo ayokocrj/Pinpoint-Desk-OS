@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Pinpoint Desk OS"
+description = "Démo interactive de Pinpoint Desk OS, la première couche de Future Recruiter AI : huit écrans, assistant Clerk, mandats, CV, données synthétiques et règles de contrôle humain, fidèles à la référence fournie."
+version = "1.0.0"
+id = "artifacts/pinpoint-desk-os"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18409
+
+[services.development]
+run = "pnpm --filter @workspace/pinpoint-desk-os run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pinpoint-desk-os", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/pinpoint-desk-os/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18409"
+BASE_PATH = "/"
