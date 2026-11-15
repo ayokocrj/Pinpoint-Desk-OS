@@ -136,6 +136,17 @@ table.t tr:hover td{background:#FBF7F7}
 .landing>p.l{animation-delay:60ms}
 .landing>.cards{animation:desk-enter .36s 90ms ease-out both}
 .msg{animation:clerk-enter .22s ease-out both}
+.clerk-pending{display:flex;align-items:center;gap:10px;padding:10px 0 14px;color:var(--muted);font-size:12px}
+.clerk-pending small{font-size:9px;margin-left:7px;color:var(--muted);border:1px solid var(--line);padding:2px 5px;border-radius:4px}
+.clerk-dots{display:inline-flex;gap:4px;align-items:center;height:14px}
+.clerk-dots i{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:clerk-dot .95s ease-in-out infinite}
+.clerk-dots i:nth-child(2){animation-delay:.14s}
+.clerk-dots i:nth-child(3){animation-delay:.28s}
+@keyframes clerk-dot{0%,65%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.step-reveal{animation:clerk-enter .24s ease-out both}
+.answer-reveal{animation:clerk-enter .32s ease-out both}
+.steps li[hidden]{display:none}
+.preparing .steps:not(:has(li:not([hidden]))){display:none}
 .btn,.ib,.rail .it,.cardx button,.frow,.lay button{transition:background-color .16s,color .16s,border-color .16s,box-shadow .16s,transform .16s}
 .btn:active:not(:disabled),.ib:active:not(:disabled){transform:scale(.98)}
 .box{transition:border-color .18s,box-shadow .18s}

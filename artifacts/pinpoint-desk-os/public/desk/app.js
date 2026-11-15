@@ -562,8 +562,27 @@ function addAI(r){
   stream.append(d); stream.scrollTop=stream.scrollHeight;
   const lis=$$('.steps li',d), ans=$('.ans',d);
   if(reduced||!lis.length){lis.forEach(l=>l.classList.add('done')); ans.style.display=''; if(r.after) r.after(); return}
-  lis.forEach((l,i)=>setTimeout(()=>{l.classList.add('done'); stream.scrollTop=stream.scrollHeight},240*(i+1)));
-  setTimeout(()=>{ans.style.display=''; stream.scrollTop=stream.scrollHeight; if(r.after) r.after()},240*(lis.length+1));
+  // Presentation pacing for the local demo, not a model's internal reasoning.
+  const pending=document.createElement('div');
+  pending.className='clerk-pending';
+  pending.setAttribute('role','status');
+  pending.innerHTML='<span class="clerk-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Preparing response <small>Local demo</small></span>';
+  $('.who',d).after(pending);
+  d.classList.add('preparing');
+  lis.forEach(l=>{l.hidden=true});
+  const interval=Math.min(460,1900/lis.length);
+  lis.forEach((l,i)=>setTimeout(()=>{
+    if(!d.isConnected) return;
+    l.hidden=false; l.classList.add('done','step-reveal');
+    stream.scrollTop=stream.scrollHeight;
+  },550+interval*i));
+  setTimeout(()=>{
+    if(!d.isConnected) return;
+    pending.remove(); d.classList.remove('preparing');
+    ans.style.display=''; ans.classList.add('answer-reveal');
+    stream.scrollTop=stream.scrollHeight;
+    if(r.after) r.after();
+  },800+interval*lis.length);
 }
 const cidIn=t=>{const m=/\bC-?(\d{3,4})\b/i.exec(t); return m?'C-'+m[1].padStart(4,'0'):null};
 const midIn=t=>{const m=/\bM-?(\d{4})\b/i.exec(t); return m?'M-'+m[1]:null};
