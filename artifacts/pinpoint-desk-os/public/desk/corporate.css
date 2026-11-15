@@ -1,0 +1,74 @@
+/* Pinpoint Desk OS: corporate finishing layer. Loaded last; presentation only.
+   Same crimson / maroon / ink tokens. Details distilled from a reference workstation:
+   hairline cards on a tinted canvas, uppercase eyebrows, tabular figures, quiet scrollbars,
+   segmented controls inset on a soft track, sticky table headers, one restrained rise on load. */
+:root{--hair:#E6E0E1;--canvas:#F4F1F1;--r-card:10px;--focus:0 0 0 3px rgba(172,41,46,.16)}
+body{background:var(--canvas);letter-spacing:-.003em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* Quiet scrollbars */
+.main,.stream,.rail,.xbody,#drawer{scrollbar-width:thin;scrollbar-color:#D4C9CA transparent}
+.main::-webkit-scrollbar,.stream::-webkit-scrollbar,.rail::-webkit-scrollbar,.xbody::-webkit-scrollbar,#drawer::-webkit-scrollbar{width:8px;height:8px}
+.main::-webkit-scrollbar-thumb,.stream::-webkit-scrollbar-thumb,.rail::-webkit-scrollbar-thumb,.xbody::-webkit-scrollbar-thumb,#drawer::-webkit-scrollbar-thumb{background:#D9CFD0;border-radius:8px}
+
+/* Focus: one consistent ring */
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:0;box-shadow:var(--focus)}
+
+/* Top bar: hairline accent under maroon, calmer guarantees */
+.top{border-bottom:2px solid var(--acc)}
+.top .guar span{font-variant-numeric:tabular-nums}
+
+/* Rail: section eyebrows with a hairline, crisper active state */
+.rail{border-right:1px solid var(--hair)}
+.rail .grp{display:flex;align-items:center;gap:8px;font-weight:600;color:#9A8F90;text-transform:uppercase}
+.rail .grp::after{content:"";flex:1;height:1px;background:var(--hair)}
+.rail .it:hover:not(.on){background:#F5EEEE}
+.rail .it.on{box-shadow:inset 3px 0 0 var(--acc),0 6px 16px -10px rgba(66,0,8,.6)}
+.findbtn{transition:border-color .15s,box-shadow .15s}
+.findbtn:hover{box-shadow:0 1px 0 rgba(66,0,8,.06),0 4px 10px -6px rgba(66,0,8,.25)}
+
+/* Workspace header: title plus a quiet breadcrumb eyebrow */
+.wsh{border-bottom:1px solid var(--hair);box-shadow:0 1px 0 rgba(66,0,8,.03)}
+.wsh .t{letter-spacing:-.01em}
+.wsh .t::before{content:"Pinpoint Desk OS  /  ";font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#A39899;white-space:pre}
+.lay{background:var(--pale);padding:2px;border-radius:8px;border-color:var(--hair)}
+.lay button{border-radius:6px;transition:background .15s,color .15s}
+.lay button+button{border-left:0}
+.lay button.on{box-shadow:0 1px 2px rgba(66,0,8,.12)}
+
+/* Cards and KPIs: hairline, small eyebrow labels, tabular figures */
+.card,.cardx{border-color:var(--hair);border-radius:var(--r-card);box-shadow:0 1px 0 rgba(66,0,8,.03)}
+.card .hd{padding-bottom:7px;border-bottom:1px solid #F0EBEB}
+.kpi{border-color:var(--hair);border-top-width:2px;border-radius:var(--r-card);padding:10px 12px}
+.kpi .v{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .l{font-size:10.6px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#8A7F80}
+
+/* Tables: sticky headers, zebra-free hairlines, legible numerics */
+table.t{font-variant-numeric:tabular-nums}
+table.t th{position:sticky;top:0;z-index:1;background:var(--card);border-bottom:1px solid var(--deep);padding:7px 8px}
+table.t td{border-bottom-color:#EEE8E9}
+table.t tbody tr:last-child td{border-bottom:0}
+table.t tr.click td{transition:background .12s}
+table.t tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--acc)}
+
+/* Tags and buttons: tighter, more deliberate */
+.tag{letter-spacing:.01em}
+.btn{transition:background .15s,border-color .15s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+
+/* Modal sheets */
+.xhead h2{letter-spacing:-.01em}
+.xsheet{border-color:var(--hair)}
+.conn div:nth-child(even){background:var(--soft)}
+
+/* One restrained entrance per screen render */
+@keyframes pp-rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.main>*{animation:pp-rise .36s var(--ease,cubic-bezier(.2,.7,.2,1)) both}
+.main>*:nth-child(2){animation-delay:.03s}.main>*:nth-child(3){animation-delay:.06s}.main>*:nth-child(n+4){animation-delay:.09s}
+
+@media (max-width:900px){.wsh .t::before{content:none}}
+@media (prefers-reduced-motion:reduce){
+  .main>*{animation:none}
+  .btn:active{transform:none}
+  *,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{body{overflow:visible}.main>*{animation:none}}
