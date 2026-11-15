@@ -115,9 +115,9 @@ function openConn(){
    ['Public registers','Simulated','st-sim','No register is called. Checks are simulated and labelled; each register’s terms are read with Pinpoint before any automation.'],
    ['Microsoft 365 and Outlook','Not connected','st-off','Drafts are held in a simulated mailbox for '+ME_CODE+'. In a pilot, Clerk would run inside your tenant, behind the rules on screen 6.'],
    ['Microdec','Not connected','st-off','The demo reads a synthetic export. The source system is treated as read-only: rule R-3.'],
-   ['Model provider','None','st-off','Clerk answers with the rule-based reader and router in this page. No text leaves the browser.'],
+   ['Model provider','Optional voice','st-sim','Text workflows use local rules. Talk to Clerk connects to Gemini Live after consent, sending microphone audio and the current desk screen to Google via the server. The API key never reaches the browser.'],
    ['Sending','Does not exist','st-ok','There is no send, email, merge, delete or reject action anywhere in the code: rules R-1, R-3 and R-4.'],
-   ['Your pasted text','Not stored','st-ok','A brief or CV text you paste is read in memory for this session only. The log keeps the word count, not the text.']];
+   ['Your pasted text','Not stored by demo','st-ok','Text workflows read it in browser memory. If you start voice, text visible on the desk screen is shared with Google. This demo does not persist audio or transcripts; Google account terms apply.']];
   sheet('xconn','Connection status','<div class="conn" data-testid="status-connections">'+rows.map(r=>'<div><b>'+esc(r[0])+'</b><b class="'+r[2]+'">'+esc(r[1])+'</b><span>'+r[3]+'</span></div>').join('')+'</div>'+
    '<p class="xs muted" style="margin:10px 0 0">Concept demo prepared for Pinpoint Partners by Roland-Caryl Obam Ngo’O. Not a Pinpoint product, and not connected to any Pinpoint system.</p>');
 }

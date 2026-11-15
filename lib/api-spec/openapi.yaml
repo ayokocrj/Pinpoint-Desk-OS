@@ -11,6 +11,32 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /voice/session:
+    post:
+      operationId: createVoiceSession
+      summary: Consent to a bounded Gemini Live session
+      description: Returns a one-use 60-second ticket for the voice WebSocket subprotocol. Audio and transcripts are not persisted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VoiceSessionInput"
+      responses:
+        "201":
+          description: Session ticket created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VoiceSession"
+        "400":
+          description: Invalid consent or input
+        "403":
+          description: Origin denied
+        "429":
+          description: Demo usage limit reached
+        "503":
+          description: Voice is not configured or is busy
   /healthz:
     get:
       operationId: healthCheck
@@ -26,6 +52,31 @@ paths:
                 $ref: "#/components/schemas/HealthStatus"
 components:
   schemas:
+    VoiceSessionInput:
+      type: object
+      required: [consent, context, sampleRate]
+      properties:
+        consent:
+          type: boolean
+        context:
+          type: string
+          maxLength: 12000
+        sampleRate:
+          type: integer
+          minimum: 8000
+          maximum: 48000
+    VoiceSession:
+      type: object
+      required: [socketPath, model, maxSeconds, ticket]
+      properties:
+        socketPath:
+          type: string
+        model:
+          type: string
+        maxSeconds:
+          type: integer
+        ticket:
+          type: string
     HealthStatus:
       type: object
       properties:
