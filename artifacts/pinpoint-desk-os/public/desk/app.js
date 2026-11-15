@@ -558,7 +558,7 @@ function addUser(text){const d=document.createElement('div'); d.className='msg u
 function addAI(r){
   const d=document.createElement('div'); d.className='msg ai';
   const steps=(r.steps||[]).map(s=>'<li'+(s[0]==='!'?' class="fixs"':s[0]==='×'?' class="blk"':'')+'>'+esc(s.replace(/^[!×]/,''))+'</li>').join('');
-  d.innerHTML='<div class="av">C</div><div class="body"><div class="who"><b>Clerk</b> · '+now()+'</div>'+(steps?'<ul class="steps">'+steps+'</ul>':'')+'<div class="ans" style="'+(steps&&!reduced?'display:none':'')+'">'+r.html+(r.acts?'<div class="acts">'+r.acts+'</div>':'')+(r.line?'<div class="toolline">'+r.line+'</div>':'')+'</div></div>';
+  d.innerHTML='<div class="av"><img src="/brand/pinpoint-mark.png" alt="Pinpoint Partners" width="28" height="28"></div><div class="body"><div class="who"><b>Clerk</b> · '+now()+'</div>'+(steps?'<ul class="steps">'+steps+'</ul>':'')+'<div class="ans" style="'+(steps&&!reduced?'display:none':'')+'">'+r.html+(r.acts?'<div class="acts">'+r.acts+'</div>':'')+(r.line?'<div class="toolline">'+r.line+'</div>':'')+'</div></div>';
   stream.append(d); stream.scrollTop=stream.scrollHeight;
   const lis=$$('.steps li',d), ans=$('.ans',d);
   if(reduced||!lis.length){lis.forEach(l=>l.classList.add('done')); ans.style.display=''; if(r.after) r.after(); return}
