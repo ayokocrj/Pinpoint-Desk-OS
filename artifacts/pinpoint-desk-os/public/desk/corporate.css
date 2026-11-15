@@ -1,74 +1,126 @@
-/* Pinpoint Desk OS: corporate finishing layer. Loaded last; presentation only.
-   Same crimson / maroon / ink tokens. Details distilled from a reference workstation:
-   hairline cards on a tinted canvas, uppercase eyebrows, tabular figures, quiet scrollbars,
-   segmented controls inset on a soft track, sticky table headers, one restrained rise on load. */
-:root{--hair:#E6E0E1;--canvas:#F4F1F1;--r-card:10px;--focus:0 0 0 3px rgba(172,41,46,.16)}
-body{background:var(--canvas);letter-spacing:-.003em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-
-/* Quiet scrollbars */
-.main,.stream,.rail,.xbody,#drawer{scrollbar-width:thin;scrollbar-color:#D4C9CA transparent}
-.main::-webkit-scrollbar,.stream::-webkit-scrollbar,.rail::-webkit-scrollbar,.xbody::-webkit-scrollbar,#drawer::-webkit-scrollbar{width:8px;height:8px}
-.main::-webkit-scrollbar-thumb,.stream::-webkit-scrollbar-thumb,.rail::-webkit-scrollbar-thumb,.xbody::-webkit-scrollbar-thumb,#drawer::-webkit-scrollbar-thumb{background:#D9CFD0;border-radius:8px}
-
-/* Focus: one consistent ring */
-button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:0;box-shadow:var(--focus)}
-
-/* Top bar: hairline accent under maroon, calmer guarantees */
-.top{border-bottom:2px solid var(--acc)}
-.top .guar span{font-variant-numeric:tabular-nums}
-
-/* Rail: section eyebrows with a hairline, crisper active state */
-.rail{border-right:1px solid var(--hair)}
-.rail .grp{display:flex;align-items:center;gap:8px;font-weight:600;color:#9A8F90;text-transform:uppercase}
-.rail .grp::after{content:"";flex:1;height:1px;background:var(--hair)}
-.rail .it:hover:not(.on){background:#F5EEEE}
-.rail .it.on{box-shadow:inset 3px 0 0 var(--acc),0 6px 16px -10px rgba(66,0,8,.6)}
-.findbtn{transition:border-color .15s,box-shadow .15s}
-.findbtn:hover{box-shadow:0 1px 0 rgba(66,0,8,.06),0 4px 10px -6px rgba(66,0,8,.25)}
-
-/* Workspace header: title plus a quiet breadcrumb eyebrow */
-.wsh{border-bottom:1px solid var(--hair);box-shadow:0 1px 0 rgba(66,0,8,.03)}
-.wsh .t{letter-spacing:-.01em}
-.wsh .t::before{content:"Pinpoint Desk OS  /  ";font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#A39899;white-space:pre}
-.lay{background:var(--pale);padding:2px;border-radius:8px;border-color:var(--hair)}
-.lay button{border-radius:6px;transition:background .15s,color .15s}
-.lay button+button{border-left:0}
-.lay button.on{box-shadow:0 1px 2px rgba(66,0,8,.12)}
-
-/* Cards and KPIs: hairline, small eyebrow labels, tabular figures */
-.card,.cardx{border-color:var(--hair);border-radius:var(--r-card);box-shadow:0 1px 0 rgba(66,0,8,.03)}
-.card .hd{padding-bottom:7px;border-bottom:1px solid #F0EBEB}
-.kpi{border-color:var(--hair);border-top-width:2px;border-radius:var(--r-card);padding:10px 12px}
-.kpi .v{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.kpi .l{font-size:10.6px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#8A7F80}
-
-/* Tables: sticky headers, zebra-free hairlines, legible numerics */
-table.t{font-variant-numeric:tabular-nums}
-table.t th{position:sticky;top:0;z-index:1;background:var(--card);border-bottom:1px solid var(--deep);padding:7px 8px}
-table.t td{border-bottom-color:#EEE8E9}
+/* Fund OS component language, translated to the Pinpoint palette. */
+@font-face{font-family:Instrument Sans;src:url(/fonts/instrument-sans-400.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Instrument Sans;src:url(/fonts/instrument-sans-500.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Instrument Sans;src:url(/fonts/instrument-sans-600.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:Instrument Sans;src:url(/fonts/instrument-sans-700.ttf);font-weight:700;font-display:swap}
+:root{--sans:"Instrument Sans",Arial,sans-serif;--serif:var(--sans);--rail-w:248px;--line:#E4DDDE;--bg:#F7F4F4;--soft:#F5F0F0;--muted:#776C6E}
+body{font-size:13px;letter-spacing:-.003em;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:var(--sans)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.top{height:52px;min-height:52px;padding:0 18px;gap:16px;border:0;box-shadow:none}
+.top .wm{font-size:19px;padding-right:16px;line-height:1}
+.top .wm small{font-size:6px;margin-top:5px}
+.top .brand{font-size:13px;font-weight:500;white-space:nowrap}
+.top .guar{justify-content:flex-end;gap:18px}
+.top .guar span{border:0;background:none;border-radius:0;padding:0;color:#D4BFC1;font-size:11px}
+.top .who{display:flex;align-items:center;gap:10px;font-size:11px;line-height:1.4}
+.top .who b{font-weight:500}
+.top .who .identity{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#77323A;color:#F7D9DB;font-size:10px}
+.top .livepill{font-size:10px;padding:4px 8px;border-color:#86515A;background:none}
+.demo-label{border:1px solid #86515A;border-radius:20px;padding:3px 8px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#F1B8BB;white-space:nowrap}
+.rail{background:#F0EAEA;padding:14px 10px 12px;border-right:1px solid #E0D6D8}
+.rail-tools{gap:8px}
+.findbtn{font-size:12px;border-radius:7px;padding:8px 10px;box-shadow:none}
+.rail .newc{font-size:11px;font-weight:500;min-height:30px;padding:6px;white-space:nowrap}
+.rail .grp{font-size:10px;letter-spacing:.07em;font-weight:500;margin:22px 8px 6px;color:var(--muted)}
+.rail .it{align-items:center;gap:9px;padding:7px 9px;border-radius:6px;min-height:34px;margin:1px 0}
+.rail .it .ico{display:none}
+.rail .it .lbl{font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap}
+.rail .it .lbl small{display:none}
+.rail .it .n{order:-1;display:grid;place-items:center;flex:0 0 18px;width:18px;height:18px;border-radius:4px;background:#FAF7F7;border:1px solid #DDD2D4;font:500 10px var(--sans);margin:0;color:var(--muted)}
+.rail .it.on{background:var(--deep);box-shadow:none}
+.rail .it.on .n{background:var(--rose);border-color:var(--rose);color:var(--deep)}
+.rail .it .dotf{position:static;width:5px;height:5px;flex-basis:5px}
+.rail .it:hover:not(.on){background:#E8DEDF}
+.connect{margin-top:auto;margin-bottom:12px;background:transparent;border:0;border-top:1px solid #DDD2D4;border-radius:0;padding:14px 8px 0}
+.connect b{font-size:11px;font-weight:500;color:var(--ink2)}
+.connect small{font-size:10px;color:var(--muted)}
+.cdot{width:6px;height:6px;flex-basis:6px;box-shadow:none}
+.rail .note{font-size:10px;line-height:1.6;border-color:#DDD2D4;padding:10px 8px 0;color:var(--muted)}
+.chat{background:#FCFAFA;flex:1 1 440px;min-width:330px}
+.chathd{height:58px;padding:10px 22px;gap:9px;background:transparent}
+.chathd b{font-size:13px;font-weight:600}
+.chathd .av,.msg.ai .av{font-family:var(--sans);font-size:12px;border-radius:7px}
+.chathd .st{font-size:10px;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chathd .st i{width:5px;height:5px}
+.chathd .lvchip{font-size:10px;background:transparent;border:0;padding:0}
+.chathd .btn{font-size:10px}
+.stream{padding:28px 24px 16px}
+.landing{margin:0 auto;max-width:650px}
+.eyebrow{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+.landing h1{font:400 28px/1.17 var(--sans);letter-spacing:-.035em;margin:14px 0 12px;max-width:430px}
+.landing h1 span{color:var(--acc)}
+.landing p.l{font-size:12px;line-height:1.7;color:var(--muted);margin-bottom:18px}
+.tourcta{margin-bottom:24px;gap:10px}
+.tourcta .small{font-size:10px}
+.newline{font-size:11px;line-height:1.6;background:#F5EEEE;border:1px solid #E5D5D7;padding:12px;border-radius:9px;margin-bottom:16px}
+.cards{gap:10px}
+.cardx{padding:14px 12px;border-radius:10px;border-color:var(--line);box-shadow:none}
+.cardx h3{font-size:11px;text-transform:none;letter-spacing:0;font-weight:600;color:var(--ink);margin-bottom:8px}
+.cardx button{font-size:11.5px;line-height:1.5;padding:6px 4px;position:relative}
+.cardx button:hover{background:var(--soft);color:var(--mid)}
+.composer{padding:12px 22px;background:#FCFAFA;border-top:0}
+.chips{padding-bottom:9px}
+.chips button{font-size:10.5px;padding:4px 9px;background:transparent}
+.box{border-radius:12px;padding:10px;box-shadow:0 2px 4px #42000805}
+.box textarea{font-size:13px;min-height:40px}
+.hint{font-size:10px;line-height:1.5;margin-top:10px;text-align:center}
+.msg.ai .body{background:transparent;border:0;padding:0 0 8px;border-radius:0}
+.msg p,.msg li{font-size:13px;line-height:1.65}
+.msg.user .bub{font-size:13px;border-radius:14px 14px 4px 14px}
+.steps{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.steps li{font-size:11px}
+.steps li::before{width:5px;height:5px;left:0}
+.ws{background:var(--bg);flex:1.55 1 660px}
+.wsh{min-height:58px;padding:10px 20px;gap:8px}
+.wsh .t{font-size:11px;font-weight:500;color:var(--muted)}
+.wsh .t::before{content:none}
+.wsh .t small{display:none}
+.wsh .syn{font-size:9px;font-weight:500;letter-spacing:.06em;border:0;background:var(--pale);color:var(--muted);padding:3px 7px;border-radius:20px}
+.lay{padding:2px;background:var(--soft);border-radius:7px;flex-shrink:0}
+.lay button{font-size:10px;font-weight:500;white-space:nowrap;padding:5px 8px;border:0!important;border-radius:5px}
+.lay button.on{box-shadow:0 1px 2px #42000816}
+.main{padding:24px 24px 0}
+.screenhead{margin-bottom:22px}
+.screenhead .eyebrow{font-size:9px;display:flex;align-items:center;gap:8px}
+.screenhead .eyebrow:after{content:"";width:24px;height:1px;background:var(--line)}
+.screenhead h1{font-size:21px;font-weight:600;line-height:1.25;letter-spacing:-.025em;margin:7px 0}
+.screenhead p{font-size:12px;color:var(--muted);line-height:1.6;margin:0;max-width:65ch}
+.concept-foot{font-size:10px;line-height:1.6;color:var(--muted);border-top:1px solid var(--line);margin-top:24px;padding:14px 0 24px}
+h2.sh{font-size:11px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--ink2);margin:22px 0 10px}
+.card{padding:16px;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 0 #42000806}
+.card .hd{margin-bottom:10px;padding:0;border:0;gap:8px}
+.card .hd h3{font:600 13px/1.4 var(--sans);letter-spacing:-.01em}
+.card p,.lead{font-size:12px;line-height:1.65}
+.kpis{gap:8px;margin:14px 0 20px}
+.kpi{padding:14px 12px;border:1px solid var(--line)!important;border-radius:10px;box-shadow:none}
+.kpi .v{font-size:23px;letter-spacing:-.03em;font-weight:600}
+.kpi .v small{font-size:11px}
+.kpi .l{font-size:10.5px;line-height:1.5;text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted);margin-top:7px}
+table.t{font-size:11.5px;line-height:1.55}
+table.t th{font-size:10px;text-transform:none;letter-spacing:0;font-weight:500;background:var(--soft);border-bottom:1px solid var(--line);padding:9px 10px}
+table.t td{padding:10px;border-color:#ECE5E6}
 table.t tbody tr:last-child td{border-bottom:0}
-table.t tr.click td{transition:background .12s}
-table.t tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--acc)}
-
-/* Tags and buttons: tighter, more deliberate */
-.tag{letter-spacing:.01em}
-.btn{transition:background .15s,border-color .15s,box-shadow .15s}
-.btn:active{transform:translateY(1px)}
-
-/* Modal sheets */
-.xhead h2{letter-spacing:-.01em}
-.xsheet{border-color:var(--hair)}
-.conn div:nth-child(even){background:var(--soft)}
-
-/* One restrained entrance per screen render */
-@keyframes pp-rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.main>*{animation:pp-rise .36s var(--ease,cubic-bezier(.2,.7,.2,1)) both}
-.main>*:nth-child(2){animation-delay:.03s}.main>*:nth-child(3){animation-delay:.06s}.main>*:nth-child(n+4){animation-delay:.09s}
-
-@media (max-width:900px){.wsh .t::before{content:none}}
-@media (prefers-reduced-motion:reduce){
-  .main>*{animation:none}
-  .btn:active{transform:none}
-  *,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
-@media print{body{overflow:visible}.main>*{animation:none}}
+table.t tr:hover td{background:#FBF7F7}
+.tag{border:0!important;border-radius:20px;padding:2px 7px;font-size:10px;letter-spacing:0;font-weight:500}
+.tag.ok:before,.tag.bad:before,.tag.warn:before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;vertical-align:2px;margin-right:4px}
+.src{font-size:10px;background:var(--card);color:var(--muted);border-color:var(--line);font-weight:500;border-radius:5px}
+.btn{font-size:12px;font-weight:500;border-radius:8px;min-height:30px;padding:5px 10px}
+.btn.sm{min-height:27px;font-size:11px;padding:4px 9px}
+.btn.primary{background:var(--deep)}
+.field{font-size:12px;border-bottom-style:solid;padding:8px 0}
+.journey{border-radius:9px;overflow:hidden;margin-bottom:20px}
+.journey .j{font-size:11px}
+.xhead h2,.sc h3,.fempty h3{font-family:var(--sans);font-weight:600}
+.xsheet{border-radius:14px;border-color:var(--line)}
+.xhead{padding:18px 20px}
+.xbody{padding:18px 20px}
+.xfoot{font-size:10px;padding:12px 20px}
+.frow{padding:12px 10px;border-radius:7px}
+.frow .fm b{font-size:12px}.frow .fm span{font-size:10.5px}
+.sc h3{font-size:14px}.sc p{font-size:12px;line-height:1.6}
+.main,.stream,.rail,.xbody{scrollbar-width:thin;scrollbar-color:#D7CBCD transparent}
+.btn,.it,.cardx button{transition:background .15s,border-color .15s,color .15s}
+@media(min-width:901px) and (max-width:1250px){:root{--rail-w:210px}.top .guar{display:none}.rail .it .lbl{font-size:11px}.chat{min-width:300px}.stream,.main{padding-left:18px;padding-right:18px}.chathd .lvchip{display:none}.top .who{margin-left:auto}}
+@media(max-width:900px){.top{height:auto;min-height:64px;padding:12px 16px;flex-wrap:wrap;gap:8px 12px}.top .brand{font-size:12px}.top .guar,.top .who,.top .demo-label{display:none}.top .wm{font-size:18px}.livepill{margin-left:auto}.chat{min-width:0}.chathd{padding:12px 18px;height:auto;min-height:58px}.stream{padding:24px 20px 16px}.composer{padding:10px 16px}.main{padding:22px 18px 0}.landing h1{font-size:28px}.wsh{padding:12px 18px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cardx{padding:12px 10px}.cardx button{font-size:11px}.screenhead h1{font-size:22px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.top .brand small{display:none}.mobtabs button{font-size:11px}.mobtools button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

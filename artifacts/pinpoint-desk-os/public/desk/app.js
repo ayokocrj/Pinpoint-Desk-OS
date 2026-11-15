@@ -513,7 +513,7 @@ function render(tab,flash){
   S.tab=tab;
   $('#wst').innerHTML=esc(tab+' · '+TITLES[tab])+'<small>'+esc(SUBS[tab])+'</small>';
   const main=$('#main'), keep=main.scrollTop, same=main.dataset.tab===String(tab);
-  main.innerHTML=SCREENS[tab](); main.dataset.tab=tab;
+  main.innerHTML='<header class="screenhead"><div class="eyebrow">Workspace '+String(tab).padStart(2,'0')+' · Synthetic data</div><h1>'+esc(TITLES[tab])+'</h1><p>'+esc(SUBS[tab])+'</p></header>'+SCREENS[tab]()+'<footer class="concept-foot">Independent concept by Roland-Caryl Obam Ngo’O. Not a Pinpoint product. Synthetic data; no connected systems.</footer>'; main.dataset.tab=tab;
   $$('.rail .it').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));
   $$('#mobtabs button').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));
   main.scrollTop=same&&!flash?keep:0;
@@ -671,7 +671,7 @@ function ask(text){
   setTimeout(()=>{addAI(A[key](text)); if(S.tab===0||S.tab===6) setTimeout(()=>{ if((S.tab===0||S.tab===6)&&!TOUR) render(S.tab) },900)},reduced?0:220);
 }
 function landing(){
-  stream.innerHTML='<div class="landing"><h1>Good morning. Here is what Clerk prepared before you sat down.</h1><p class="l">Ask about your desk. Every answer shows its steps, and every suggestion its evidence and its date. Nothing is emailed, sent, merged or rejected without you.</p><div class="tourcta"><button class="btn primary" data-act="tour">▶ Watch the 60-second tour</button><span class="small muted">or ask anything below</span></div><p class="newline"><span class="syntag">08:12</span> Mandate M-0457 arrived: Associate, Corporate M&A, 3 to 5 years, London. <button data-ask="Longlist for M-0457?">Ask for the longlist</button></p><div class="cards">'+
+  stream.innerHTML='<div class="landing"><div class="eyebrow">Your desk, prepared · London legal</div><h1>Clerk prepares the work.<br><span>You make the call.</span></h1><p class="l">Your follow-ups, mandates and candidate evidence, in one place. Every recommendation has a source and a date. Every decision stays with you.</p><div class="tourcta"><button class="btn primary" data-act="tour">Explore the workflow</button><span class="small muted">60-second guided tour</span></div><p class="newline"><span class="syntag">New mandate · 08:12</span><br><b>M-0457 · Corporate M&amp;A</b><br>Associate · 3 to 5 years · London<br><button data-ask="Longlist for M-0457?">Review the proposed longlist →</button></p><div class="cards">'+
   [['Your day',['Who should I call today, and why?','Longlist for M-0457?','Why is C-4929 not on the list?']],['The record',['Who is duplicated on my desk?','What can you confirm on CV-05?','What is C-4112’s salary expectation?']],['Across desks',['How many M&A and private equity lawyers do we know in New York?','How was the method tested?']],['What it will not do',['Send C-4112’s CV to the client','Merge all the duplicates','Pause Clerk']]].map(c=>'<div class="cardx"><h3>'+c[0]+'</h3>'+c[1].map(q=>'<button data-ask="'+esc(q)+'"'+(isRefusal(q)?' class="r"':'')+'>'+esc(q)+'</button>').join('')+'</div>').join('')+'</div><p class="small muted" style="margin-top:12px">You can also paste a role brief here, or on screen 1: Clerk reads it and ranks the synthetic records against it.</p></div>';
 }
 const CHIPS=QUESTIONS.concat(['Merge all the duplicates','Pause Clerk']);
