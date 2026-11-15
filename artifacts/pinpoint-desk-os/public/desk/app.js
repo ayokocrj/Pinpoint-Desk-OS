@@ -513,6 +513,7 @@ function render(tab,flash){
   S.tab=tab;
   $('#wst').innerHTML=esc(tab+' · '+TITLES[tab])+'<small>'+esc(SUBS[tab])+'</small>';
   const main=$('#main'), keep=main.scrollTop, same=main.dataset.tab===String(tab);
+  main.classList.toggle('screen-enter',!same);
   main.innerHTML='<header class="screenhead"><div class="eyebrow">Workspace '+String(tab).padStart(2,'0')+' · Synthetic data</div><h1>'+esc(TITLES[tab])+'</h1><p>'+esc(SUBS[tab])+'</p></header>'+SCREENS[tab]()+'<footer class="concept-foot">Independent concept by Roland-Caryl Obam Ngo’O. Not a Pinpoint product. Synthetic data; no connected systems.</footer>'; main.dataset.tab=tab;
   $$('.rail .it').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));
   $$('#mobtabs button').forEach(b=>b.classList.toggle('on',+b.dataset.tab===tab));

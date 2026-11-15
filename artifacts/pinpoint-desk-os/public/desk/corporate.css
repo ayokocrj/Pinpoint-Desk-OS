@@ -121,6 +121,26 @@ table.t tr:hover td{background:#FBF7F7}
 .sc h3{font-size:14px}.sc p{font-size:12px;line-height:1.6}
 .main,.stream,.rail,.xbody{scrollbar-width:thin;scrollbar-color:#D7CBCD transparent}
 .btn,.it,.cardx button{transition:background .15s,border-color .15s,color .15s}
+/* Short, one-shot feedback. No ambient loops or delayed interaction. */
+@keyframes desk-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes clerk-enter{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.main.screen-enter>.screenhead{animation:desk-enter .24s ease-out both}
+.main.screen-enter>.card,.main.screen-enter>.grid,.main.screen-enter>.kpis,.main.screen-enter>.journey{animation:desk-enter .3s ease-out both}
+.main.screen-enter>.kpis{animation-delay:35ms}
+.landing>.eyebrow,.landing>h1,.landing>p.l{animation:desk-enter .32s ease-out both}
+.landing>h1{animation-delay:30ms}
+.landing>p.l{animation-delay:60ms}
+.landing>.cards{animation:desk-enter .36s 90ms ease-out both}
+.msg{animation:clerk-enter .22s ease-out both}
+.btn,.ib,.rail .it,.cardx button,.frow,.lay button{transition:background-color .16s,color .16s,border-color .16s,box-shadow .16s,transform .16s}
+.btn:active:not(:disabled),.ib:active:not(:disabled){transform:scale(.98)}
+.box{transition:border-color .18s,box-shadow .18s}
+.box:focus-within{box-shadow:0 0 0 3px #AC292E10}
+@media(hover:hover){
+  .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 2px 5px #4200080c}
+  .rail .it:hover:not(.on){transform:translateX(2px)}
+  .cardx button:hover{transform:translateX(2px)}
+}
 @media(min-width:901px) and (max-width:1250px){:root{--rail-w:210px}.top .guar{display:none}.rail .it .lbl{font-size:11px}.chat{min-width:300px}.stream,.main{padding-left:18px;padding-right:18px}.chathd .lvchip{display:none}.top .who{margin-left:auto}}
 @media(max-width:900px){.top{height:auto;min-height:64px;padding:12px 16px;flex-wrap:wrap;gap:8px 12px}.top .brand{font-size:12px}.top .guar,.top .who,.top .demo-label{display:none}.top .wm{font-size:18px}.livepill{margin-left:auto}.chat{min-width:0}.chathd{padding:12px 18px;height:auto;min-height:58px}.stream{padding:24px 20px 16px}.composer{padding:10px 16px}.main{padding:22px 18px 0}.landing h1{font-size:28px}.wsh{padding:12px 18px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cardx{padding:12px 10px}.cardx button{font-size:11px}.screenhead h1{font-size:22px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.top .brand small{display:none}.mobtabs button{font-size:11px}.mobtools button{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
