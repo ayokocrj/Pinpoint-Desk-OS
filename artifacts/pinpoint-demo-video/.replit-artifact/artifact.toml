@@ -1,0 +1,29 @@
+videoAspectRatio = "16:9"
+kind = "video"
+previewPath = "/pinpoint-demo-video/"
+title = "Pinpoint Desk OS — 90-second demo"
+description = "An English 90-second animated demonstration grounded in the Pinpoint Chief AI Tech Officer job description, technical dossier and pitch deck, showing the proof of concept and its recruitment use cases."
+version = "1.0.0"
+id = "artifacts/pinpoint-demo-video"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/pinpoint-demo-video/" ]
+localPort = 25358
+
+[services.development]
+run = "pnpm --filter @workspace/pinpoint-demo-video run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pinpoint-demo-video", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/pinpoint-demo-video/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25358"
+BASE_PATH = "/pinpoint-demo-video/"
