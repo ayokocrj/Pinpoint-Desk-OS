@@ -1,27 +1,110 @@
 @import 'tailwindcss';
 
-/* REPLACE THESE -- define your own palette and fonts for each video */
+/* Typefaces are served locally so previews and exports never wait on a network font. */
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/instrument-sans-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('/fonts/instrument-sans-500.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('/fonts/instrument-sans-600.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('/fonts/instrument-sans-700.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 300;
+  font-display: block;
+  src: url('/fonts/assistant-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('/fonts/assistant-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('/fonts/jetbrains-mono-500.woff2') format('woff2');
+}
+
 :root {
-  --color-primary: #000000;
-  --color-secondary: #6b7280;
-  --color-accent: #3b82f6;
+  /* Pinpoint palette, read from the Desk OS demo */
+  --pp-deep: #420008;
+  --pp-mid: #77000e;
+  --pp-acc: #ac292e;
+  --pp-hot: #e2545a;
+  --pp-wine: #77323a;
+  --pp-rose: #f1b8bb;
+  --pp-rose-soft: #f7d9db;
+  --pp-accbg: #f9ecec;
+  --pp-ink: #1e1a1b;
+  --pp-ink2: #3d3637;
+  --pp-muted: #776c6e;
+  --pp-line: #e4ddde;
+  --pp-bg: #f7f4f4;
+  --pp-soft: #f5f0f0;
+  --pp-rail: #f0eaea;
+  --pp-chat: #fcfafa;
+  --pp-card: #fffdfc;
+  --pp-ok: #2e7d5b;
+  --pp-okbg: #e3f1e8;
+  --pp-warn: #8a5a06;
+  --pp-warnbg: #faf0d9;
+  --pp-amber: #c58a12;
+  --pp-blue: #1f5e7a;
 
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #0f172a;
-  --color-bg-muted: #f8fafc;
+  --color-primary: var(--pp-deep);
+  --color-secondary: var(--pp-mid);
+  --color-accent: var(--pp-acc);
 
-  --color-text-primary: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
-  --color-text-inverse: #ffffff;
+  --color-bg-light: var(--pp-bg);
+  --color-bg-dark: var(--pp-deep);
+  --color-bg-muted: var(--pp-rail);
 
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  --color-text-primary: var(--pp-ink);
+  --color-text-secondary: var(--pp-ink2);
+  --color-text-muted: var(--pp-muted);
+  --color-text-inverse: #fbf3f3;
 
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --color-success: var(--pp-ok);
+  --color-warning: var(--pp-warn);
+  --color-error: var(--pp-acc);
+
+  --font-display: 'Instrument Sans', 'Helvetica Neue', sans-serif;
+  --font-body: 'Instrument Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'DejaVu Sans Mono', monospace;
+  --font-mark: 'Assistant', 'Instrument Sans', sans-serif;
 }
 
 @theme inline {
@@ -43,10 +126,22 @@
   --font-mono: var(--font-mono);
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--pp-deep);
+}
+
 body {
   font-family: var(--font-body);
+  color: var(--pp-ink);
+  font-variant-numeric: tabular-nums lining-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .video-media-frame {
@@ -84,4 +179,315 @@ body {
 
 .video-media-frame[data-media-position='left'] > :is(img, video) {
   object-position: left;
+}
+
+/* ---------- Film typography (frame scale, in vmin) ---------- */
+
+.f-eyebrow {
+  font-size: 2vmin;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.f-h {
+  font-weight: 600;
+  letter-spacing: -0.038em;
+  line-height: 0.98;
+  margin: 0;
+}
+
+.f-sub {
+  font-size: 3.1vmin;
+  font-weight: 400;
+  letter-spacing: -0.006em;
+  line-height: 1.32;
+  margin: 0;
+}
+
+.f-num {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.86;
+  white-space: nowrap;
+}
+
+.f-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Desk OS interface artwork (scaled by --k) ---------- */
+
+.pp-ui {
+  --k: 1;
+  color: var(--pp-ink);
+  font-size: calc(1.9vmin * var(--k));
+  line-height: 1.42;
+}
+
+.pp-card {
+  background: var(--pp-card);
+  border: max(1px, calc(0.13vmin * var(--k))) solid var(--pp-line);
+  border-radius: calc(2vmin * var(--k));
+  box-sizing: border-box;
+}
+
+.pp-tile {
+  background: var(--pp-card);
+  border: max(1px, calc(0.13vmin * var(--k))) solid var(--pp-line);
+  border-radius: calc(1.75vmin * var(--k));
+  box-sizing: border-box;
+  padding: calc(1.9vmin * var(--k)) calc(1.8vmin * var(--k)) calc(1.7vmin * var(--k));
+}
+
+.pp-tile-n {
+  font-size: calc(4.4vmin * var(--k));
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pp-tile-n small {
+  color: var(--pp-muted);
+  font-size: calc(1.7vmin * var(--k));
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-left: 0.35em;
+}
+
+.pp-tile-l {
+  color: var(--pp-muted);
+  font-size: calc(1.6vmin * var(--k));
+  line-height: 1.38;
+  margin-top: calc(1vmin * var(--k));
+}
+
+.pp-pill {
+  align-items: center;
+  background: var(--pp-soft);
+  border: max(1px, calc(0.12vmin * var(--k))) solid var(--pp-line);
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: var(--pp-ink2);
+  display: inline-flex;
+  font-size: calc(1.5vmin * var(--k));
+  font-weight: 500;
+  gap: 0.45em;
+  line-height: 1;
+  padding: calc(0.55vmin * var(--k)) calc(1.15vmin * var(--k));
+  white-space: nowrap;
+}
+
+.pp-pill.ok {
+  background: var(--pp-okbg);
+  border-color: #c7e2d2;
+  color: var(--pp-ok);
+}
+
+.pp-pill.bad {
+  background: var(--pp-accbg);
+  border-color: #ebc9cb;
+  color: var(--pp-acc);
+}
+
+.pp-pill.warn {
+  background: var(--pp-warnbg);
+  border-color: #e6d3a3;
+  color: var(--pp-warn);
+}
+
+.pp-pill.blue {
+  background: #e6f0f4;
+  border-color: #c5dbe4;
+  color: var(--pp-blue);
+}
+
+.pp-pill.deep {
+  background: var(--pp-deep);
+  border-color: var(--pp-deep);
+  color: #fff;
+  font-family: var(--font-mono);
+}
+
+.pp-code {
+  color: var(--pp-blue);
+  font-family: var(--font-mono);
+  font-size: calc(1.72vmin * var(--k));
+  text-decoration: underline;
+  text-decoration-color: #9dbfcc;
+  text-decoration-thickness: max(1px, 0.1vmin);
+  text-underline-offset: 0.22em;
+  white-space: nowrap;
+}
+
+.pp-btn {
+  align-items: center;
+  background: var(--pp-card);
+  border: max(1px, calc(0.13vmin * var(--k))) solid var(--pp-line);
+  border-radius: calc(1.15vmin * var(--k));
+  box-sizing: border-box;
+  color: var(--pp-ink);
+  display: inline-flex;
+  font-size: calc(1.8vmin * var(--k));
+  font-weight: 600;
+  line-height: 1;
+  padding: calc(1.05vmin * var(--k)) calc(1.6vmin * var(--k));
+  white-space: nowrap;
+}
+
+.pp-btn.primary {
+  background: var(--pp-deep);
+  border-color: var(--pp-deep);
+  color: #fff;
+}
+
+.pp-btn.ok {
+  border-color: #9fcab3;
+  color: var(--pp-ok);
+}
+
+.pp-top {
+  align-items: center;
+  background: var(--pp-deep);
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  flex: 0 0 auto;
+  gap: calc(2.3vmin * var(--k));
+  height: calc(7.6vmin * var(--k));
+  padding: 0 calc(2.6vmin * var(--k));
+  white-space: nowrap;
+}
+
+.pp-wm {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-mark);
+  font-size: calc(3.05vmin * var(--k));
+  font-weight: 300;
+  gap: calc(1.3vmin * var(--k));
+  letter-spacing: 0.005em;
+  line-height: 1;
+}
+
+.pp-wm small {
+  color: var(--pp-rose);
+  display: block;
+  font-size: calc(1.02vmin * var(--k));
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  margin-top: calc(0.7vmin * var(--k));
+}
+
+.pp-hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(241, 184, 187, 0.95) 0 0.42vmin,
+    rgba(241, 184, 187, 0.28) 0.42vmin 0.95vmin
+  );
+}
+
+.pp-hatch-crimson {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(172, 41, 46, 0.92) 0 0.42vmin,
+    rgba(172, 41, 46, 0.26) 0.42vmin 0.95vmin
+  );
+}
+
+/* ---------- Record hygiene dot matrix ---------- */
+
+.hy-dot {
+  fill: #f1b8bb;
+  opacity: 0.9;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 0.45s ease,
+    fill 0.35s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hy[data-s~='dup'] .hy-keep,
+.hy[data-s~='dup'] .hy-gone {
+  fill: #ffffff;
+  opacity: 1;
+  transform: scale(1.55);
+}
+
+.hy[data-s~='merge'] .hy-gone {
+  opacity: 0;
+  transform: translateX(-10px) scale(0.4);
+}
+
+.hy[data-s~='merge'] .hy-keep {
+  fill: #ffffff;
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+.hy[data-s~='stale'] .hy-stale {
+  opacity: 0.2;
+}
+
+.hy[data-s~='firm'] .hy-firm {
+  fill: #e9ad3f;
+  opacity: 0.95;
+}
+
+.hy[data-s~='merge'][data-s~='stale'] .hy-gone,
+.hy[data-s~='merge'][data-s~='firm'] .hy-gone {
+  opacity: 0;
+}
+
+/* ---------- Ambient loops (CSS, so the preview pause freezes them) ---------- */
+
+@keyframes pp-wave {
+  0%,
+  100% {
+    transform: scaleY(0.18);
+  }
+  35% {
+    transform: scaleY(1);
+  }
+  70% {
+    transform: scaleY(0.45);
+  }
+}
+
+@keyframes pp-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pp-ring {
+  0% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes pp-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.55;
+  }
 }

@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "67rKtLrUoC60WnXFgm3Rg"
+uri = "file://artifacts/pinpoint-demo-video/public/audio/bg_music.mp3"
+type = "audio"
+title = "background music for Pinpoint Desk OS 90-second demo"
+description = "Generated music: Confident, warm modern corporate-minimal instrumental scoring a 90-second B2B software demo film for a legal and banking recruitment firm. 96 BPM, 4/4, steady and precise. Felt piano…"
